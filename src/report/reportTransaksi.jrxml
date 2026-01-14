@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="164" pageHeight="842" columnWidth="144" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10">
+	<property name="ireport.zoom" value="1.771561000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idtransaksi" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+    transaksi.idtransaksi AS transaksi_idtransaksi,
+    transaksi.id_pelanggan AS transaksi_id_pelanggan,
+    transaksi.nama_pelanggan AS transaksi_nama_pelanggan,
+    transaksi.diskon AS transaksi_diskon,
+    transaksi.total_bayar AS transaksi_total_bayar,
+    transaksi.uang_bayar AS transaksi_uang_bayar,
+    transaksi.kembalian AS transaksi_kembalian,
+    transaksi.metode_pembayaran AS transaksi_metode_pembayaran,
+    transaksi.tanggal_transaksi AS transaksi_tanggal_transaksi
+FROM transaksi
+WHERE transaksi.idtransaksi = $P{idtransaksi}
+   OR $P{idtransaksi} IS NULL
+ORDER BY transaksi.idtransaksi DESC
+LIMIT 1;
+]]>
+	</queryString>
+	<field name="transaksi_idtransaksi" class="java.lang.Integer"/>
+	<field name="transaksi_id_pelanggan" class="java.lang.Integer"/>
+	<field name="transaksi_nama_pelanggan" class="java.lang.String"/>
+	<field name="transaksi_diskon" class="java.lang.Double"/>
+	<field name="transaksi_total_bayar" class="java.lang.Double"/>
+	<field name="transaksi_uang_bayar" class="java.lang.Double"/>
+	<field name="transaksi_kembalian" class="java.lang.Double"/>
+	<field name="transaksi_metode_pembayaran" class="java.lang.String"/>
+	<field name="transaksi_tanggal_transaksi" class="java.sql.Timestamp"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="83" splitType="Stretch">
+			<image>
+				<reportElement x="58" y="0" width="28" height="25"/>
+				<imageExpression><![CDATA["../IMG/logo_giant.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="25" width="144" height="30"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[ Jl. Komjen. Pol. M. Jasin No.45, Cimanggis, Depok]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="55" width="144" height="14"/>
+				<textElement/>
+				<text><![CDATA[Tlpn : +62 857-8086-4001 (WA)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="69" width="144" height="14"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[---------------------------------------------]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="47" width="109" height="15"/>
+				<textElement/>
+				<text><![CDATA[ID Pelanggan ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="119" y="48" width="25" height="14"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{transaksi_id_pelanggan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="119" y="34" width="25" height="14"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{transaksi_idtransaksi}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="33" width="109" height="15"/>
+				<textElement/>
+				<text><![CDATA[ID Transaksi ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="1" width="72" height="15"/>
+				<textElement/>
+				<text><![CDATA[Tgl Transaksi :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="72" y="1" width="72" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{transaksi_tanggal_transaksi}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="16" width="144" height="14"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[---------------------------------------------]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="64" width="109" height="15"/>
+				<textElement/>
+				<text><![CDATA[Nama Pelanggan ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="119" y="65" width="25" height="14"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{transaksi_nama_pelanggan}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="113" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="144" height="14"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[---------------------------------------------]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="119" y="14" width="25" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{transaksi_diskon}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="14" width="119" height="13"/>
+				<textElement/>
+				<text><![CDATA[Diskon ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="99" y="27" width="45" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{transaksi_total_bayar}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="29" width="86" height="13"/>
+				<textElement/>
+				<text><![CDATA[Total Bayar ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="99" y="42" width="45" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{transaksi_uang_bayar}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="40" width="86" height="15"/>
+				<textElement/>
+				<text><![CDATA[Uang Bayar ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="99" y="55" width="45" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{transaksi_kembalian}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="55" width="86" height="15"/>
+				<textElement/>
+				<text><![CDATA[Kembalian   ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="70" width="144" height="14"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[---------------------------------------------]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="109" y="84" width="35" height="14"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{transaksi_metode_pembayaran}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="84" width="99" height="15"/>
+				<textElement/>
+				<text><![CDATA[Metode Pembayaran]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="99" width="144" height="14"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[---------------------------------------------]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<summary>
+		<band height="69" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="28" width="144" height="29"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Terima Kasih Telah Percaya Pada Toko Kami]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="144" height="28"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Struk ini sebagai bukti pembayaran & Garansi Service]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>
