@@ -31,16 +31,16 @@ public class beranda extends javax.swing.JFrame {
         txtDashboard = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtJasa = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtDataPelanggan = new javax.swing.JLabel();
-        txtLaporan = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         txtTransaksi = new javax.swing.JLabel();
         txtLogout = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        txtLaporan = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         pn_kanan = new javax.swing.JPanel();
         JpanelNavbar = new javax.swing.JPanel();
         jPanelGradient1 = new jpanelgradient.JPanelGradient();
@@ -78,8 +78,6 @@ public class beranda extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/Analyze.png"))); // NOI18N
-
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/People.png"))); // NOI18N
 
         txtDataPelanggan.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
@@ -91,18 +89,9 @@ public class beranda extends javax.swing.JFrame {
             }
         });
 
-        txtLaporan.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
-        txtLaporan.setForeground(new java.awt.Color(255, 255, 255));
-        txtLaporan.setText("Laporan");
-        txtLaporan.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtLaporanMouseClicked(evt);
-            }
-        });
-
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/Tools.png"))); // NOI18N
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/Transaction_1.png"))); // NOI18N
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/Analyze.png"))); // NOI18N
 
         txtTransaksi.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         txtTransaksi.setForeground(new java.awt.Color(255, 255, 255));
@@ -126,28 +115,41 @@ public class beranda extends javax.swing.JFrame {
 
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/Profile.png"))); // NOI18N
 
+        txtLaporan.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
+        txtLaporan.setForeground(new java.awt.Color(255, 255, 255));
+        txtLaporan.setText("Laporan");
+        txtLaporan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtLaporanMouseClicked(evt);
+            }
+        });
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/Transaction_1.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanelGradient2Layout = new javax.swing.GroupLayout(jPanelGradient2);
         jPanelGradient2.setLayout(jPanelGradient2Layout);
         jPanelGradient2Layout.setHorizontalGroup(
             jPanelGradient2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelGradient2Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(jPanelGradient2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanelGradient2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelGradient2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel10))
                 .addGap(18, 18, 18)
-                .addGroup(jPanelGradient2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtLogout)
+                .addGroup(jPanelGradient2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtLaporan)
-                    .addComponent(txtDataPelanggan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtJasa)
-                    .addComponent(txtTransaksi)
-                    .addComponent(jLabel14)
-                    .addComponent(txtDashboard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanelGradient2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtDataPelanggan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtJasa)
+                        .addComponent(txtTransaksi)
+                        .addComponent(jLabel14)
+                        .addComponent(txtDashboard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtLogout))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
         jPanelGradient2Layout.setVerticalGroup(
@@ -155,48 +157,45 @@ public class beranda extends javax.swing.JFrame {
             .addGroup(jPanelGradient2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel14)
+                .addGap(55, 55, 55)
+                .addGroup(jPanelGradient2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelGradient2Layout.createSequentialGroup()
+                        .addGroup(jPanelGradient2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanelGradient2Layout.createSequentialGroup()
+                                .addGroup(jPanelGradient2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanelGradient2Layout.createSequentialGroup()
+                                        .addComponent(txtDashboard)
+                                        .addGap(84, 84, 84)
+                                        .addComponent(txtDataPelanggan)
+                                        .addGap(48, 48, 48))
+                                    .addGroup(jPanelGradient2Layout.createSequentialGroup()
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(51, 51, 51)
+                                        .addComponent(jLabel6)
+                                        .addGap(28, 28, 28)))
+                                .addGap(42, 42, 42)
+                                .addComponent(txtJasa)
+                                .addGap(21, 21, 21))
+                            .addComponent(jLabel9))
+                        .addGap(75, 75, 75)
+                        .addComponent(txtTransaksi)
+                        .addGap(19, 19, 19))
+                    .addComponent(jLabel11))
                 .addGroup(jPanelGradient2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelGradient2Layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addComponent(txtDashboard))
+                        .addGap(53, 53, 53)
+                        .addComponent(jLabel10))
                     .addGroup(jPanelGradient2Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(78, 78, 78)
+                        .addComponent(txtLaporan)))
                 .addGroup(jPanelGradient2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelGradient2Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jLabel6))
-                    .addGroup(jPanelGradient2Layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
-                        .addComponent(txtDataPelanggan)))
-                .addGroup(jPanelGradient2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelGradient2Layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
-                        .addComponent(txtJasa)
-                        .addGap(90, 90, 90)
-                        .addComponent(txtTransaksi))
-                    .addGroup(jPanelGradient2Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jLabel9)
-                        .addGap(50, 50, 50)
-                        .addComponent(jLabel10)))
-                .addGroup(jPanelGradient2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelGradient2Layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(jLabel5)
-                        .addGap(8, 8, 8))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelGradient2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtLaporan)
-                        .addGap(26, 26, 26)))
-                .addGroup(jPanelGradient2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelGradient2Layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
+                        .addGap(62, 62, 62)
                         .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelGradient2Layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
+                        .addGap(78, 78, 78)
                         .addComponent(txtLogout)))
-                .addContainerGap(103, Short.MAX_VALUE))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pn_kiriLayout = new javax.swing.GroupLayout(pn_kiri);
@@ -332,16 +331,16 @@ pn_utama.repaint();
 pn_utama.revalidate();
     }//GEN-LAST:event_txtTransaksiMouseClicked
 
-    private void txtLaporanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtLaporanMouseClicked
-pn_utama.removeAll();
-pn_utama.add(new Laporan());       
-pn_utama.repaint();
-pn_utama.revalidate();
-    }//GEN-LAST:event_txtLaporanMouseClicked
-
     private void txtLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtLogoutMouseClicked
 dispose(); 
     }//GEN-LAST:event_txtLogoutMouseClicked
+
+    private void txtLaporanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtLaporanMouseClicked
+pn_utama.removeAll();
+pn_utama.add(new laporanbulanan());       
+pn_utama.repaint();
+pn_utama.revalidate();
+    }//GEN-LAST:event_txtLaporanMouseClicked
 
     /**
      * @param args the command line arguments
@@ -382,10 +381,10 @@ dispose();
     private javax.swing.JPanel JpanelNavbar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;

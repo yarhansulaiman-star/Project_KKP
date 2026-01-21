@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.sql.DriverManager;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -74,7 +75,7 @@ public class transaksi extends javax.swing.JPanel {
     }
 
     // =====================================================
-    // LOAD TABLE
+    // LOAD TABLE TRANSAKSI
     // =====================================================
     private void loadTableTransaksi() {
 
@@ -122,195 +123,123 @@ public class transaksi extends javax.swing.JPanel {
         }
     }
 
-// =====================================================
-// SIMPAN TRANSAKSI + CETAK STRUK
-// =====================================================
-private void simpanTransaksi() {
+    // =====================================================
+    // SIMPAN TRANSAKSI + CETAK STRUK
+    // =====================================================
+    private void simpanTransaksi() {
 
-    if (txtID.getText().isEmpty()
-            || txtTotalBayar.getText().isEmpty()
-            || txtUangBayar.getText().isEmpty()) {
+        if (txtID.getText().isEmpty()
+                || txtTotalBayar.getText().isEmpty()
+                || txtUangBayar.getText().isEmpty()) {
 
-        JOptionPane.showMessageDialog(this,
-                "Data belum lengkap!");
-        return;
-    }
-
-    Connection conn = null;
-
-    try {
-        double total = Double.parseDouble(txtTotalBayar.getText());
-        double bayar = Double.parseDouble(txtUangBayar.getText());
-        double diskon = txtDiskon.getText().isEmpty() ? 0
-                : Double.parseDouble(txtDiskon.getText());
-
-        double kembalian = bayar - (total - diskon);
-
-        if (kembalian < 0) {
             JOptionPane.showMessageDialog(this,
-                    "Uang bayar kurang!");
+                    "Data belum lengkap!");
             return;
         }
 
-        txtKembalian.setText(String.valueOf(kembalian));
-
-        conn = config.configDB();
-        conn.setAutoCommit(false);
-
-        String sql = "INSERT INTO transaksi "
-                + "(id_pelanggan, nama_pelanggan, diskon, total_bayar, "
-                + "uang_bayar, kembalian, metode_pembayaran, tanggal_transaksi) "
-                + "VALUES (?,?,?,?,?,?,?,?)";
-
-        PreparedStatement pst = conn.prepareStatement(
-                sql,
-                Statement.RETURN_GENERATED_KEYS
-        );
-
-        pst.setInt(1, Integer.parseInt(txtID.getText()));
-        pst.setString(2, txtNamaPelanggan.getText());
-        pst.setDouble(3, diskon);
-        pst.setDouble(4, total);
-        pst.setDouble(5, bayar);
-        pst.setDouble(6, kembalian);
-        pst.setString(7, txtMetodePembayaran.getText());
-        pst.setTimestamp(8, new Timestamp(System.currentTimeMillis()));
-
-        pst.executeUpdate();
-
-        // commit simpan transaksi
-        conn.commit();
-
-        int idTransaksi = 0;
-
-        // --- ambil id transaksi ---
-        ResultSet rs = pst.getGeneratedKeys();
-        if (rs != null && rs.next()) {
-            idTransaksi = rs.getInt(1);
-        }
-
-        // jika database tidak support GENERATED_KEYS
-        if (idTransaksi == 0) {
-            Statement st = conn.createStatement();
-            ResultSet rs2 = st.executeQuery(
-                    "SELECT idtransaksi FROM transaksi ORDER BY idtransaksi DESC LIMIT 1"
-            );
-            if (rs2.next()) {
-                idTransaksi = rs2.getInt("idtransaksi");
-            }
-            rs2.close();
-            st.close();
-        }
-
-        pst.close();
-        conn.setAutoCommit(true);
-        conn.close();
-
-        // ============================
-        // CETAK STRUK OTOMATIS
-        // ============================
-        cetakStrukJasper(idTransaksi);
-
-        JOptionPane.showMessageDialog(this,
-                "Transaksi berhasil dan struk dicetak otomatis");
-
-        loadTableTransaksi();
-        clearForm();
-
-    } catch (Exception e) {
+        Connection conn = null;
 
         try {
-            if (conn != null) {
-                conn.rollback();
-                conn.setAutoCommit(true);
+            double total = Double.parseDouble(txtTotalBayar.getText());
+            double bayar = Double.parseDouble(txtUangBayar.getText());
+            double diskon = txtDiskon.getText().isEmpty() ? 0
+                    : Double.parseDouble(txtDiskon.getText());
+
+            double kembalian = bayar - (total - diskon);
+
+            if (kembalian < 0) {
+                JOptionPane.showMessageDialog(this,
+                        "Uang bayar kurang!");
+                return;
             }
-        } catch (Exception ex) { }
 
-        JOptionPane.showMessageDialog(this,
-                "Simpan error : " + e.getMessage());
-    }
-}
+            txtKembalian.setText(String.valueOf(kembalian));
 
+            conn = config.configDB();
+            conn.setAutoCommit(false);
 
-   private void hapusTransaksi() {
+            String sql = "INSERT INTO transaksi "
+                    + "(id_pelanggan, nama_pelanggan, diskon, total_bayar, "
+                    + "uang_bayar, kembalian, metode_pembayaran, tanggal_transaksi) "
+                    + "VALUES (?,?,?,?,?,?,?,?)";
 
-    int baris = tabletransaksi.getSelectedRow();
+            PreparedStatement pst = conn.prepareStatement(
+                    sql, Statement.RETURN_GENERATED_KEYS);
 
-    // Tidak ada baris yang dipilih
-    if (baris == -1) {
-        JOptionPane.showMessageDialog(this,
-                "Silahkan pilih data transaksi yang akan dihapus");
-        return;
-    }
+            pst.setInt(1, Integer.parseInt(txtID.getText()));
+            pst.setString(2, txtNamaPelanggan.getText());
+            pst.setDouble(3, diskon);
+            pst.setDouble(4, total);
+            pst.setDouble(5, bayar);
+            pst.setDouble(6, kembalian);
+            pst.setString(7, txtMetodePembayaran.getText());
+            pst.setTimestamp(8, new Timestamp(System.currentTimeMillis()));
 
-    // Ambil idtransaksi dari kolom pertama (index 0)
-    String idTransaksi = tabletransaksi.getValueAt(baris, 0).toString();
+            pst.executeUpdate();
+            conn.commit();
 
-    int konf = JOptionPane.showConfirmDialog(this,
-            "Yakin ingin menghapus transaksi dengan ID " + idTransaksi + " ?",
-            "Konfirmasi Hapus",
-            JOptionPane.YES_NO_OPTION);
+            int idTransaksi = 0;
+            ResultSet rs = pst.getGeneratedKeys();
+            if (rs.next()) {
+                idTransaksi = rs.getInt(1);
+            }
 
-    if (konf != JOptionPane.YES_OPTION) {
-        return;
-    }
+            pst.close();
+            conn.close();
 
-    try {
-        Connection conn = config.configDB();
+            // CETAK STRUK OTOMATIS
+            cetakStruk(String.valueOf(idTransaksi));
 
-        String sql = "DELETE FROM transaksi WHERE idtransaksi = ?";
+            JOptionPane.showMessageDialog(this,
+                    "Transaksi berhasil & struk tercetak");
 
-        PreparedStatement pst = conn.prepareStatement(sql);
-        pst.setString(1, idTransaksi);
-        pst.executeUpdate();
+            loadTableTransaksi();
+            clearForm();
 
-        JOptionPane.showMessageDialog(this,
-                "Data transaksi berhasil dihapus");
-
-        // reload tabel
-        loadTableTransaksi();
-
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this,
-                "Gagal menghapus transaksi : " + e.getMessage());
-    }
-}
-
-
- private void cetakStrukJasper(int idTransaksi) {
-    Connection conn = null;
-
-    try {
-        conn = config.configDB();
-
-        HashMap<String, Object> parameter = new HashMap<>();
-        parameter.put("idtransaksi", idTransaksi);
-
-        // SESUAIKAN NAMA FILE JASPER DI SINI
-        InputStream file = getClass().getResourceAsStream("/report/reportTransaksi.jasper");
-
-        // cek kalau file tidak ditemukan
-        if (file == null) {
-            throw new RuntimeException("File reportTransaksi.jasper tidak ditemukan di folder /report");
+        } catch (Exception e) {
+            try {
+                if (conn != null) conn.rollback();
+            } catch (Exception ex) {}
+            JOptionPane.showMessageDialog(this,
+                    "Simpan error : " + e.getMessage());
         }
+    }
 
-        JasperPrint jp = JasperFillManager.fillReport(file, parameter, conn);
+    // =====================================================
+    // CETAK STRUK JASPER
+    // =====================================================
+   private void cetakStruk(String idTransaksi) {
+ try {
+        Connection conn = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/login",
+                "root",
+                ""
+        );
 
-        // tampilkan preview
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("id_transaksi", idTransaksi);
+
+        // Path laporan
+        String reportPath = getClass().getResource(
+                "/report/reportTransaksi.jasper"
+        ).getPath();
+
+        JasperPrint jp = JasperFillManager.fillReport(
+                reportPath,
+                param,
+                conn
+        );
+
         JasperViewer.viewReport(jp, false);
 
-        // jika mau langsung print tanpa preview, aktifkan ini:
-        // JasperPrintManager.printReport(jp, true);
+        conn.close();
 
     } catch (Exception e) {
         JOptionPane.showMessageDialog(this,
-            "Gagal mencetak struk : " + e.getMessage());
-    } finally {
-        try { if (conn != null) conn.close(); } catch (Exception ex) {}
+                "Gagal mencetak struk : " + e.getMessage());
+        e.printStackTrace();
     }
 }
-
-
 
 
     // =====================================================
@@ -336,6 +265,56 @@ private void simpanTransaksi() {
             }
         });
     }
+private void hapusTransaksi() {
+
+    int baris = tabletransaksi.getSelectedRow();
+
+    // Jika belum memilih baris
+    if (baris == -1) {
+        JOptionPane.showMessageDialog(this,
+                "Silakan pilih data transaksi yang akan dihapus");
+        return;
+    }
+
+    // Ambil ID Transaksi dari JTable (kolom ke-0)
+    String idTransaksi = tabletransaksi.getValueAt(baris, 0).toString();
+
+    // Konfirmasi hapus
+    int konfirmasi = JOptionPane.showConfirmDialog(this,
+            "Yakin ingin menghapus transaksi dengan ID " + idTransaksi + " ?",
+            "Konfirmasi Hapus",
+            JOptionPane.YES_NO_OPTION);
+
+    if (konfirmasi != JOptionPane.YES_OPTION) {
+        return;
+    }
+
+    try {
+        Connection conn = config.configDB();
+
+        String sql = "DELETE FROM transaksi WHERE idtransaksi = ?";
+
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setString(1, idTransaksi);
+        pst.executeUpdate();
+
+        pst.close();
+        conn.close();
+
+        JOptionPane.showMessageDialog(this,
+                "Data transaksi berhasil dihapus");
+
+        // Refresh tabel
+        loadTableTransaksi();
+
+        // Optional: bersihkan form
+        clearForm();
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this,
+                "Gagal menghapus transaksi : " + e.getMessage());
+    }
+}
 
 
 
@@ -671,6 +650,24 @@ private void simpanTransaksi() {
 
     private void btnCetakstrukMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCetakstrukMouseClicked
 
+    // Ambil baris yang dipilih di JTable
+    int row = tabletransaksi.getSelectedRow();
+
+    // Jika belum memilih data
+    if (row == -1) {
+        JOptionPane.showMessageDialog(this,
+                "Silakan pilih data transaksi terlebih dahulu!");
+        return;
+    }
+
+    // Ambil ID Transaksi (kolom ke-0)
+    String idTransaksi = tabletransaksi.getValueAt(row, 0).toString();
+
+    // Debug (opsional, bisa dihapus)
+    System.out.println("Cetak struk ID : " + idTransaksi);
+
+    // Panggil cetak Jasper
+    cetakStruk(idTransaksi);
     }//GEN-LAST:event_btnCetakstrukMouseClicked
 
 

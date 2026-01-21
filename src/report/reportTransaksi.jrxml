@@ -21,8 +21,7 @@ FROM transaksi
 WHERE transaksi.idtransaksi = $P{idtransaksi}
    OR $P{idtransaksi} IS NULL
 ORDER BY transaksi.idtransaksi DESC
-LIMIT 1;
-]]>
+LIMIT 1;]]>
 	</queryString>
 	<field name="transaksi_idtransaksi" class="java.lang.Integer"/>
 	<field name="transaksi_id_pelanggan" class="java.lang.Integer"/>
@@ -67,7 +66,7 @@ LIMIT 1;
 				<text><![CDATA[ID Pelanggan ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="119" y="48" width="25" height="14"/>
+				<reportElement x="109" y="47" width="35" height="14"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{transaksi_id_pelanggan}]]></textFieldExpression>
 			</textField>
@@ -97,12 +96,12 @@ LIMIT 1;
 				<text><![CDATA[---------------------------------------------]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="64" width="109" height="15"/>
+				<reportElement x="0" y="60" width="109" height="15"/>
 				<textElement/>
 				<text><![CDATA[Nama Pelanggan ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="119" y="65" width="25" height="14"/>
+				<reportElement x="109" y="61" width="35" height="14"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{transaksi_nama_pelanggan}]]></textFieldExpression>
 			</textField>
